@@ -85,3 +85,19 @@ gym.register(
     entry_point="omni.isaac.orbit_envs.manipulation.lift:LiftEnv",
     kwargs={"cfg_entry_point": "omni.isaac.orbit_envs.manipulation.lift:LiftEnvCfg"},
 )
+
+##
+# Surgery
+##
+
+gym.register(
+    id="Isaac-SimpleSurg-Franka-v0",
+    entry_point="omni.isaac.orbit_envs.surgery.simple:SimpleSurgEnv",
+    kwargs={"cfg_entry_point": "omni.isaac.orbit_envs.surgery.simple:SimpleSurgEnvCfg"},
+)
+
+gym.register(
+    id="Isaac-Traction-Franka-v0",
+    entry_point="omni.isaac.orbit_envs.surgery.traction:TractionEnv",
+    kwargs={"cfg_entry_point": "omni.isaac.orbit_envs.surgery.traction:TractionEnvCfg"},
+)

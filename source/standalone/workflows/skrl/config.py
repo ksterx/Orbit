@@ -28,6 +28,9 @@ SKRL_PPO_CONFIG_FILE = {
     "Isaac-Reach-Franka-v0": os.path.join(ORBIT_ENVS_DATA_DIR, "skrl/reach_ppo.yaml"),
     # locomotion
     "Isaac-Velocity-Anymal-C-v0": os.path.join(ORBIT_ENVS_DATA_DIR, "skrl/anymal_ppo.yaml"),
+    # surgery
+    "Isaac-SimpleSurg-Franka-v0": os.path.join(ORBIT_ENVS_DATA_DIR, "skrl/simplesurg_ppo.yaml"),
+    "Isaac-Traction-Franka-v0": os.path.join(ORBIT_ENVS_DATA_DIR, "skrl/traction_ppo.yaml"),
 }
 """Mapping from environment names to PPO agent files."""
 
