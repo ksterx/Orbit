@@ -85,6 +85,28 @@ class TractionEnv(IsaacEnv):
         # return list of global prims
         return ["/World/defaultGroundPlane"]
 
+    def _create_deformable(self, stage):
+        stage.DefinePrim(cube_path).GetReferences().AddReference(mesh_path)
+        skinMesh = UsdGeom.Mesh.Define(stage, cube_path)
+        skinMesh.AddTranslateOp().Set(position)
+        skinMesh.AddOrientOp().Set(Gf.Quatf(1.0))
+        skinMesh.AddScaleOp().Set(Gf.Vec3f(size, size, size))
+        deformableUtils.add_physx_deformable_body(
+            stage,
+            cube_path,
+            simulation_hexahedral_resolution=3,
+            collision_simplification=True,
+            self_collision=False,
+            solver_position_iteration_count=pos_iterations,
+        )
+        physicsUtils.add_physics_material_to_prim(stage, skinMesh.GetPrim(), phys_material_path)
+        physxCollisionAPI = PhysxSchema.PhysxCollisionAPI.Apply(skinMesh.GetPrim())
+        physxCollisionAPI.GetContactOffsetAttr().Set(0.02)
+        physxCollisionAPI.CreateRestOffsetAttr().Set(0.001)
+        omni.kit.commands.execute(
+            "BindMaterialCommand", prim_path=cube_path, material_path=grfx_material, strength=None
+        )
+
     def _reset_idx(self, env_ids: VecEnvIndices):
         # randomize the MDP
         # -- robot DOF state
